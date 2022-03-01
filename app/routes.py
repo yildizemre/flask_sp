@@ -1,4 +1,5 @@
 from random import random
+import cv2
 from flask import Flask, flash, request, redirect, url_for, current_app,send_from_directory,render_template, session
 import numpy as np
 import mysql.connector
@@ -13,10 +14,18 @@ from wtforms.fields.html5 import TelField,IntegerField
 from datetime import datetime
 from app import app
 from app import metnecevir
-import easyocr
-import pytesseract
-from PIL import Image
-
+import cv2
+from pyzbar import pyzbar
+def read_barcodes(frame):
+    barcodes = pyzbar.decode(frame)
+   
+    for barcode in barcodes:
+        x, y , w, h = barcode.rect
+        #1
+        barcode_info = barcode.data.decode('utf-8')
+        # print(barcode_info)
+       
+    return barcode_info
 
 def login_required(f):
     @wraps(f)
@@ -398,32 +407,52 @@ def index():
             print("kimlik oku")
             file_on = request.files['file_on']
             file_arka = request.files['file_arka']
+            barcode_info=""
             if file_on and allowed_file(file_on.filename):
+
+
                 now_save=datetime.now()
                 
                 file_on.save("./app/static/kimlik_on/"+str(now_save)+".jpg")
-                file_on_url = "./app/static/kimlik_on/"+str(now_save)+".jpg"
-                a=pytesseract.image_to_string(Image.open("./app/static/kimlik_on/"+str(now_save)+".jpg"), lang="tur")
-                print("----------------------")
-                print(a)
-                print("----------------------")
 
+            if file_arka and allowed_file(file_arka.filename):
+                now_save=datetime.now()
+                
+                file_arka.save("./app/static/kimlik_arka/"+str(now_save)+".jpg")
+                file_arka = "./app/static/kimlik_arka/"+str(now_save)+".jpg"
 
-                reader = easyocr.Reader(['tr'])
-                result = reader.readtext("./app/static/kimlik_on/"+str(now_save)+".jpg")
+                roi=cv2.imread("./app/static/kimlik_arka/"+str(now_save)+".jpg")
+                try:
 
-                print("-------------------------")
-                # img1 = cv2.imread('on.jpeg')
-                tc_kimlik_no = (result[4][1])
-                print("ön yüz "+str(tc_kimlik_no))
-                adi = result[10][1]
-                soyadi = result[7][1]
-                adi_soyadi = adi+" "+soyadi
-                print(adi_soyadi)
-                print(tc_kimlik_no)
+                    barcode_info = read_barcodes(roi)
 
-                form2.isim_soyisim.data=adi_soyadi
-                form2.tc_no.data=tc_kimlik_no
+                    print(barcode_info)
+                except Exception as e:
+                    flash("Kimlik Okuması Başarısız Belgeyi Doğru Konum ve Doğru Açı İle Çekin Lütfen.","info")
+                    print("Kimlik Okunmadi")
+                # gray_image = cv2.cvtColor(roi, cv2.COLOR_BGR2GRAY)
+                # threshold_img = cv2.threshold(gray_image, 0, 255, cv2.THRESH_BINARY | cv2.THRESH_OTSU)[1]
+                # # custom_config = r'--oem 3 --psm 6'
+                # # details = tes.image_to_string(threshold_img, lang='eng')
+                # details=tes.image_to_string(roi ,lang='eng', config='--psm 6')
+
+                # # print(tes.image_to_string(roi))
+                # print(details)
+                # # reader = easyocr.Reader(['tr'])
+                # result = reader.readtext("./app/static/kimlik_on/"+str(now_save)+".jpg")
+
+                # print("-------------------------")
+                # # img1 = cv2.imread('on.jpeg')
+                # tc_kimlik_no = (result[4][1])
+                # print("ön yüz "+str(tc_kimlik_no))
+                # adi = "result[10][1]"
+                # soyadi = "result[7][1]"
+                # adi_soyadi = adi+" "+soyadi
+                # print(adi_soyadi)
+                # print(tc_kimlik_no)
+
+                # form2.isim_soyisim.data=adi_soyadi
+                form2.tc_no.data=barcode_info
 
 
             
