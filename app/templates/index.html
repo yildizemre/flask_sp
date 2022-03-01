@@ -1,0 +1,246 @@
+{%extends "menu.html"%}
+
+{%block header%}
+Gençlik Ve Spor Bakanlığı Eğitim Tesisi Konaklama Kayıt Formu
+
+{%endblock%}
+
+{%block body%}
+{% from "includes/formhelper.html" import render_field %}
+
+
+                <form method=post>
+                  <section class="section is-main-section">
+                    <div class="notification is-info">
+                      <div class="level">
+                        <div class="level-left">
+                          <div class="level-item">
+                            <div class="field">
+                              <div class="control">
+                  <dl>
+                    {{ render_field(form1.tc_sorgulama_input,class="input",placeholder="T.C Kimlik No Giriniz.") }}
+                  
+                  </dl>
+                </div>
+                <P>&nbsp;</P>
+
+              </div>
+
+            </div>
+            <div class="level-right">
+              
+              <button type="submit" name="button" class="button is-primary" value="kimlik_sorgulama">KİMLİK SORGULAMA</button>
+            </div>
+            
+          </div>
+        </form>  
+          <div class="level-right">
+            <div>
+              <span class="icon"><i class="mdi mdi-bell-ring"></i></span>
+              <a  target="_blank" href="{{database_url}}">{{kimlik_goruntule}}</a>
+            </div>
+            
+          </div>
+        </div>
+        
+        
+        </section>
+                       
+          
+
+       
+          
+            <section class="section is-main-section">
+  
+              <div class="notification is-info">
+                <div class="level">
+                  <div class="level-item">
+                      
+                    <div>
+                      
+                      
+                      <div>
+                        <!-- <canvas id="canvas" hidden width="640" height="480" style="background-color: grey"></canvas>
+                        <video id="video" width="200" height="320"  autoplay style="background-color: grey"></video>
+                     -->
+                     <form method=post action="/" name="form" enctype = "multipart/form-data" onsubmit="return validateForm()" >
+                    
+                            <div class="field is-narrow">
+                            <div class="control">
+                            </br>
+                            </br> 
+                            <h6>Kimlik Ön Yüz:</h6>
+                            <input class="input"type = "file" name = "file_on" />
+                            <h6>Kimlik Arka Yüz:</h6>
+                            <input class="input"type = "file" name = "file_arka" />
+                            </br>
+                            </br>
+                            <div class="buttons is-right">
+                              <button type="submit" name="button" id="kaydet" class="button is-primary" value="kimlik_oku">Kimlik Oku</button>
+                              
+                              <!-- <button type="submit" name="button" id="kaydet" class="button is-primary" value="kaydet">Kaydet</button> -->
+                            </div>
+                            </div>
+                            </form>
+                            <form method=post action="/" name="form" enctype = "multipart/form-data" onsubmit="return validateForm()" >
+                          </div> 
+                          <div class="field">
+                            <div class="control">
+                              {{render_field(form2.isim_soyisim,class="input",placeholder="İsim Soyisim Giriniz.")}}
+                            </div>
+                            <div class="control">
+                              {{render_field(form2.tc_no,class="input",placeholder="T.C. Kimlik Numarası Giriniz.")}}
+                            </div>
+                            <div class="control">
+                              {{render_field(form2.meslek,class="input",placeholder="Kurum/Meslek Giriniz")}}
+                            </div>
+                            <div class="control">
+                              {{render_field(form2.telefon,class="input",placeholder="Telefon Numarası Giriniz")}}          
+                            </div>
+                            <div class="control">
+                              {{render_field(form2.plaka,class="input",placeholder="Plaka Giriniz")}}
+                            </div>
+                          </br>
+                          <div class="control">
+                          <label>Grup Durumu:</label>
+                          <input type="radio" id="group_durum" name="group_durum" class="radio" value="1" checked>Grup</input>
+                          <input type="radio" id="group_durum" name="group_durum" class="radio" value="0">Tekil</input>
+                        </br>
+                      </br>   
+                      {{render_field(form2.isim_soyisim2,class="input",placeholder="İsim Soyisim Giriniz.")}}
+                    </br> 
+                    {{render_field(form2.tc_no2,class="input",placeholder="2.Misafir T.C No")}}
+                    </br>  
+                      {{render_field(form2.isim_soyisim3,class="input",placeholder="İsim Soyisim Giriniz.")}}
+                    </br>
+                  
+                  {{render_field(form2.tc_no3,class="input",placeholder="3.Misafir T.C No")}}  
+                </br>
+                      {{render_field(form2.isim_soyisim4,class="input",placeholder="İsim Soyisim Giriniz.")}}
+                    </br>
+                    {{render_field(form2.tc_no4,class="input",placeholder="4.Misafir T.C No")}}  
+                  </br>
+                        {{render_field(form2.oda_numarasi,class="input",placeholder="Oda Numarası Giriniz")}}         
+                      
+                          </div>
+                                  </div>
+                            </div>
+                    
+                            </div>
+                          </div>
+                          <div class="level-item">
+          
+                            <div><td class="is-actions-cell">
+                              <div class="buttons is-right">
+                                <button type="submit" name="button" class="button is-primary"><a href="makbuz_page" target="_blank">MAKBUZ SAYFASI</a></button>
+                              </div>
+                            </td> 
+                            <div>  
+                              {{render_field(form2.date1,class="input",type="date")}}         
+                              {{render_field(form2.date2,class="input",type="date")}}
+                              <h4>Yemek Durumu:</h4>
+                              <input type="radio"  name="yemek_durum" class="radio" value="1" checked>Yemek Alındı</input>
+                              <input type="radio"  name="yemek_durum" class="radio" value="0">Yemek Alınmadı</input>
+                                <div class="field-body">
+                                  <div class="field is-narrow">
+                                    <div class="control">
+                                    </br>
+                                      <div class="select is-fullwidth">
+                                     
+                                        <select name="fiyat_grubu" >
+                                          {% if fiyat_grubu==1%}
+                                          <option value="0">Kamu Personeli</option>
+                                          <option name="kamu_harici" value="1" selected>Kamu Harici</option>
+                                          {%else%}
+                                          <option  value="0" selected>Kamu Personeli</option>
+                                          <option name="kamu_harici" value="1">Kamu Harici</option>
+                                        
+                                          {%endif%}
+                                        </select>     
+                                        {{render_field(form2.sicil_numarasi,class="input",placeholder="Sicil Numarası Giriniz(İsteğe Bağlı)")}}         
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              </br>
+                            </br>
+                               <br>
+                               {{render_field(form2.resepsiyon_not,class="input",placeholder="Resepsiyon Notu:",rows="4",cols="50")}}                      
+                  <div class="field-body">
+                    
+                    <div class="field is-narrow">
+                      <div class="control">
+                      </br> 
+                        <button type="submit" name="button" id="kaydet" class="button is-primary" value="kaydet">Kaydet</button>
+                      </div>
+                    </br>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+    
+          
+          
+        </div>
+      </div>
+      
+    </section>
+    <header class="card-header">
+      <p class="card-header-title">
+        <span class="icon"><i class="mdi mdi-ballot"></i></span>
+        {{rapor_return}}  
+      </p>
+      <script>
+
+        // Elements for taking the snapshot
+        var video = document.getElementById('video');
+        var canvas = document.getElementById('canvas');
+        var context = canvas.getContext('2d');
+        
+        // Get access to the camera!
+        if(navigator.mediaDevices && navigator.mediaDevices.getUserMedia) {
+            // Not adding `{ audio: true }` since we only want video now
+            navigator.mediaDevices.getUserMedia({ video: true }).then(function(stream) {
+                //video.src = window.URL.createObjectURL(stream);
+                video.srcObject = stream;
+                video.play();
+            });
+        }
+        
+        // Trigger photo take
+        document.getElementById("send").addEventListener("click", function() {
+            context.drawImage(video, 0, 0, 640, 480); // copy frame from <video>
+            canvas.toBlob(upload, "image/jpeg");  // convert to file and execute function `upload`
+        });
+        document.getElementById("arka").addEventListener("click", function() {
+            context.drawImage(video, 0, 0, 640, 480); // copy frame from <video>
+            canvas.toBlob(upload, "image/jpeg");  // convert to file and execute function `upload`
+        });
+        
+        function upload(file) {
+            // create form and append file
+            var formdata =  new FormData();
+            formdata.append("snap", file);
+            
+            // create AJAX requests POST with file
+            var xhr = new XMLHttpRequest();
+            xhr.open("POST", "{{ url_for('index') }}", true);
+            xhr.onload = function() {
+                if(this.status = 200) {
+                    console.log(this.response);
+                } else {
+                    console.error(xhr);
+                }
+                alert(this.response);
+            };
+            xhr.send(formdata);
+        }
+        
+        </script>
+    </header>
+          
+          
+        </form>
+{%endblock%}

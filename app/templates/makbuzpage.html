@@ -1,0 +1,147 @@
+{%extends "menu.html"%}
+
+{%block header%}
+Gençlik Ve Spor Bakanlığı Eğitim Tesisi Konaklama Makbuz Oluşturma Sayfası
+
+{%endblock%}
+
+{%block body%}
+{% from "includes/formhelper.html" import render_field %}
+
+
+<section class="section is-main-section">
+    <div class="notification is-info">
+        <div class="level">
+            <div class="level-item">
+
+                <div>
+
+
+                    <div>
+
+                        <form method=post action="makbuz_page" > 
+
+                            <section class="section is-main-section">
+                               
+                            
+                                
+                                <div class="field-body">
+                                    <div class="field">
+                                      <div class="control">
+                                        <input type="text"  name="tc" class="input" >
+                                      </div>
+                                      <p class="help">Tc.No veya VD.No Giriniz.</p>
+                                    </div>
+                                </div>
+                            
+                           
+                            
+            
+                         
+                            <div class="level-right">
+                            
+                            <button type="submit" name="button" class="button is-primary" value="kimlik_sorgulama">MAKBUZ SORGULAMA</button>
+                            </div>
+                            
+                      
+                    
+                </form>
+                    </section>
+                    <form method=post>
+                                   
+                        <div class="field">
+                            <div class="control">
+                                {{ render_field(form.tarih,class="input",type="date")}}
+                          
+
+                            </div>
+                            
+                            <div class="control">
+                                {{ render_field(form.oda_numarasi,class="input",placeholder="Oda Numarası Giriniz:") }}                            </div>
+                           
+                            <div class="control">
+
+                                {{ render_field(form.ad_soyad,class="input",placeholder="Ad-Soyad/Kurum Adı Giriniz:") }}
+                            </div>
+                           
+                            <div class="control">
+                                
+
+                                {{ render_field(form.vd_no,class="input",placeholder="V.D No Giriniz:") }}
+
+                            </div>
+
+                            <div class="control">
+                                
+
+                                {{ render_field(form.vd_ad,class="input",placeholder="V.D Ad Giriniz:") }}
+
+                            </div>
+                           
+                            <div class="control">
+                                
+
+                                {{ render_field(form.tahsilat_sekli,class="input",placeholder="Tahsilat Şekli:")}}
+                            </div>
+                          
+                         
+                            <div class="control">
+                                {{ render_field(form.tutar_sayi,class="input",placeholder="Sayı ile Tutar Giriniz:")}}
+
+                            </div>
+                          
+                          
+                       
+                            <div class="control">
+                                {{ render_field(form.aciklama,class="input",placeholder="Açıklama Giriniz:")}}
+                            </div>
+                            
+
+                            
+                            <div class="control">
+                                {{ render_field(form.görevli_adi,class="input",placeholder="Görevli Adı Giriniz:")}}
+                            </div>
+
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+            <div class="field-body">
+
+                <div class="field is-narrow">
+                    <div class="control">
+                        </br>
+                        <button type="submit" name="button" class="button is-primary" value="makbuz" href="makbuz" target="_blank">Makbuzu Oluştur</button>
+
+
+
+                    </div>
+                </div>
+
+            </div>
+
+
+        </form>
+
+
+
+        </div>
+
+    </div>
+    </div>
+
+
+
+    </div>
+    </div>
+
+</section>
+
+{%endblock%}
