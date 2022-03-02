@@ -48,9 +48,9 @@ def admin_required(f):
 
 try:
     mydb = mysql.connector.connect(
-        host="yatagroup.com",
-        user="hypegena",
-        password="&or496tD",
+        host="localhost",
+        user="ostechnix",
+        password="Password123#@!",
         database="hypegena_sprbkn"
     )
     print(mydb)
@@ -63,9 +63,9 @@ except Exception as e:
 
 def connection_db():
     mydb = mysql.connector.connect(
-        host="yatagroup.com",
-        user="hypegena",
-        password="&or496tD",
+        host="localhost",
+        user="ostechnix",
+        password="Password123#@!",
         database="hypegena_sprbkn"
     )
     return mydb
